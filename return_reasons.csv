@@ -1,0 +1,152 @@
+reason_text,reason_category
+Size too small, size_issue
+Didn’t fit right, size_issue
+Needed a different size, size_issue
+Wrong size sent, size_issue
+Too tight around the waist, size_issue
+Runs small, size_issue
+Runs big, size_issue
+Size chart was off, size_issue
+Might have ordered the wrong size, size_issue
+Neck area doesn’t fit, size_issue
+Sleeves too short, size_issue
+Shirt fits weird, size_issue
+Boots too narrow, size_issue
+Shoes too big, size_issue
+Shoes too small, size_issue
+Tried it on—doesn’t fit, size_issue
+Sizing is inconsistent, size_issue
+Length is off, size_issue
+Fabric doesn’t stretch enough, size_issue
+Order arrived with incorrect size, size_issue
+I need half size, size_issue
+Waist doesn’t sit right, size_issue
+Returned for exchange but got declined, size_issue
+Size option mislabeled, size_issue
+Couldn’t button it, size_issue
+Too short for me, size_issue
+Not my size, size_issue
+Didn’t match the size I expected, size_issue
+Sizing feels off, size_issue
+Not the right fit, size_issue
+damaged item, damaged
+Arrived broken, damaged
+Came cracked, damaged
+Box was crushed, damaged
+Product is scratched, damaged
+Item looks worn/damaged, damaged
+Chipped on arrival, damaged
+Piece missing, damaged
+Not working when I opened it, damaged
+Stopped working after one day, damaged
+Power issue on arrival, damaged
+Screen has a defect, damaged
+Cracked screen, damaged
+dents all over, damaged
+Scratched finish, damaged
+Bent metal, damaged
+Leaking fluid, damaged
+Bad seal, damaged
+Faulty part, damaged
+Didn’t work properly, damaged
+Just broken, damaged
+Received with damage, damaged
+Major damage during shipping, damaged
+Doesn’t power on, damaged
+Damaged package contents, damaged
+Torn fabric, damaged
+Loose wiring, damaged
+Broken zipper, damaged
+Missing component, damaged
+Arrived damaged, damaged
+Changed my mind, changed_mind
+Not something I need anymore, changed_mind
+Decision changed, changed_mind
+Just didn’t want it anymore, changed_mind
+I’m keeping something else instead, changed_mind
+Bought by mistake, changed_mind
+Impulse purchase, changed_mind
+Decided to go with another brand, changed_mind
+Found a better deal, changed_mind
+Wrong choice, changed_mind
+Couldn’t justify the purchase, changed_mind
+Need to cancel my order, changed_mind
+Would rather return than exchange, changed_mind
+Thought it would be different, changed_mind
+Didn’t match what I expected, changed_mind
+Changed mind after arrival, changed_mind
+Tried once and don’t want it, changed_mind
+I’m not gonna use this, changed_mind
+Not worth it for me, changed_mind
+Just returned for convenience, changed_mind
+Sorry—going to pass on this, changed_mind
+Didn’t like it enough, changed_mind
+I thought it was different, changed_mind
+Found alternative elsewhere, changed_mind
+Going another direction, changed_mind
+Need room in budget, changed_mind
+Don’t need it anymore, changed_mind
+Return it—no longer needed, changed_mind
+Just couldn’t commit, changed_mind
+Returned because I changed my mind, changed_mind
+Not as described, not_as_described
+Doesn’t look like the photos, not_as_described
+Color is different than shown, not_as_described
+Description was wrong, not_as_described
+Missing features mentioned, not_as_described
+Doesn’t match listing, not_as_described
+Not what I expected from the ad, not_as_described
+Material feels different, not_as_described
+Smaller than advertised, not_as_described
+Bigger than advertised, not_as_described
+Not the same model, not_as_described
+Doesn’t work as claimed, not_as_described
+Speeds are not as advertised, not_as_described
+Only works intermittently, not_as_described
+Was not as described, not_as_described
+Claimed compatible but isn’t, not_as_described
+Compatibility issue, not_as_described
+Not same style, not_as_described
+Photo makes it look nicer, not_as_described
+Expected better quality, not_as_described
+Packaging/label mismatch, not_as_described
+No instructions included, not_as_described
+Instructions are missing, not_as_described
+Different item received, not_as_described
+It’s defective but listing says new, not_as_described
+Doesn’t have the promised attachments, not_as_described
+Doesn’t fit the way described, not_as_described
+Not as described in the listing, not_as_described
+Says waterproof but it isn’t, not_as_described
+Not as described—refund please, not_as_described
+The listing is misleading, not_as_described
+Not as described, price issue, price
+Paid too much for what it is, price
+Too expensive for me, price
+Price is higher than I thought, price
+The cost doesn’t feel worth it, price
+Need cheaper option, price
+Found same item for less, price
+Price not justified, price
+Overpriced, price
+Costs more than expected, price
+Wasn’t worth the price, price
+Didn’t match the price/value, price
+Way overpriced for this quality, price
+Better price elsewhere, price
+I can’t justify spending that much, price
+Price went up after I ordered, price
+Not worth paying for it, price
+Expected more for the money, price
+This feels overpriced, price
+Too costly, price
+Price mismatch, price
+Not enough value for cost, price
+Returned due to pricing, price
+Pricing issue—too expensive, price
+Could get it cheaper, price
+Price higher than expected, price
+Wasn’t good value, price
+Cost didn’t seem fair, price
+Too expensive compared to competitors, price
+Returned because of the price, price
