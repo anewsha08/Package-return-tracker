@@ -1,20 +1,24 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "target": "es2020",
-    "outDir": "out",
-    "rootDir": "src",
-    "sourceMap": true,
-    "strict": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "resolveJsonModule": true,
-    "moduleResolution": "node",
-    "ignoreDeprecations": "5.0"
-  },
-  "include": [
-    "src"
-  ]
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "commonjs",
+        "lib": [
+            "es6"
+        ],
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "strictNullChecks": false,
+        "baseUrl": "./",
+        "moduleResolution": "node",
+        "allowJs": true,
+        "typeRoots": [
+            "./"
+        ],
+        "types": [],
+        "forceConsistentCasingInFileNames": true
+    },
+    "files": [
+        "BigInteger.d.ts",
+        "spec/tsDefinitions.ts"
+    ]
 }

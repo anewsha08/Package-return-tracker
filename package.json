@@ -1,52 +1,38 @@
 {
-  "name": "package-return-tracker",
-  "displayName": "Package Return Tracker",
-  "description": "A VS Code sidebar assistant to track package return windows and surface return reminders.",
-  "version": "0.0.1",
-  "engines": {
-    "vscode": "^1.80.0"
-  },
-  "categories": [
-    "Other"
-  ],
-  "activationEvents": [
-    "onView:packageReturnTracker.sidebarView",
-    "onCommand:packageReturnTracker.helloWorld"
-  ],
-  "main": "./out/extension.js",
-  "contributes": {
-    "commands": [
-      {
-        "command": "packageReturnTracker.helloWorld",
-        "title": "Package Return Tracker: Hello World"
-      }
-    ],
-    "viewsContainers": {
-      "activitybar": [
-        {
-          "id": "packageReturnTracker.container",
-          "title": "Return Tracker"
-        }
-      ]
+    "name" : "binary",
+    "version" : "0.3.0",
+    "description" : "Unpack multibyte binary values from buffers",
+    "main" : "./index.js",
+    "repository" : {
+        "type" : "git",
+        "url" : "http://github.com/substack/node-binary.git"
     },
-    "views": {
-      "packageReturnTracker.container": [
-        {
-          "id": "packageReturnTracker.sidebarView",
-          "name": "Return Dashboard"
-        }
-      ]
+    "keywords": [
+        "binary",
+        "decode",
+        "endian",
+        "unpack",
+        "signed",
+        "unsigned"
+    ],
+    "author" : {
+        "name" : "James Halliday",
+        "email" : "mail@substack.net",
+        "url" : "http://substack.net"
+    },
+    "dependencies" : {
+        "chainsaw" : "~0.1.0",
+        "buffers" : "~0.1.1"
+    },
+    "devDependencies" : {
+        "seq" : "~0.2.5",
+        "tap" : "~0.2.4"
+    },
+    "scripts" : {
+        "test" : "tap test/*.js"
+    },
+    "license" : "MIT",
+    "engine" : {
+        "node" : ">=0.4.0"
     }
-  },
-  "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile"
-  },
-  "devDependencies": {
-    "@types/vscode": "^1.80.0",
-    "typescript": "^5.5.0",
-    "vscode-test": "^2.0.0"
-  }
 }
