@@ -1,177 +1,50 @@
-binary
-======
+# Package Return Tracker
 
-Unpack multibyte binary values from buffers and streams.
-You can specify the endianness and signedness of the fields to be unpacked too.
+## What is This Project
+Package Return Tracker is a machine learning powered tool that helps customers track their package return deadlines, predicts which packages are likely to be returned, and automatically reminds them before the return window closes so they never get stuck with an item they wanted to send back.
 
-This module is a cleaner and more complete version of
-[bufferlist](https://github.com/substack/node-bufferlist)'s binary module that
-runs on pre-allocated buffers instead of a linked list.
+## The Problem
+When a package arrives, customers intend to decide whether to keep or return it but set it aside and forget. The return window quietly closes and they are stuck with the item. There is no system that watches their deliveries, predicts which ones are at risk, and reminds them at the right time. Retailers also lose billions annually because customers miss return windows and then raise disputes, chargebacks, and complaints instead.
 
-[![build status](https://secure.travis-ci.org/substack/node-binary.png)](http://travis-ci.org/substack/node-binary)
+## The Solution
+Package Return Tracker solves this in three steps. First it predicts which delivered packages are likely to be returned using a machine learning model trained on order data. Second it reads any return reason the customer types and automatically categorizes it using an NLP model. Third it tracks the return deadline for every order in a database and fires reminders before the window closes, walking the customer through the return process.
 
-examples
-========
+## Tech Stack
+- Python 3.12 — core language for all scripts, models, and automation
+- pandas — loading, cleaning, and transforming order data
+- scikit-learn — model training, TF-IDF vectorizer, preprocessing, evaluation metrics
+- XGBoost — gradient boosting classifier for return likelihood prediction
+- matplotlib and seaborn — charts for EDA, confusion matrix, feature importance
+- SQLite and sqlite3 — lightweight database storing orders, return windows, reasons, and notifications
+- pickle — saving and loading trained models
+- Jupyter Notebook — environment for EDA, model training, and evaluation
 
-stream.js
----------
+## How it Works — Step by Step
+Step 1 — Data: 3000 synthetic orders are generated with features like category, price, discount percentage, vendor, and whether multiple sizes were ordered. Return likelihood is made to depend realistically on these features.
+Step 2 — EDA: charts are produced showing overall return rate, return rate by category, impact of ordering multiple sizes, and price distribution for returned vs kept orders.
+Step 3 — ML Model 1: three classifiers are trained and compared — Logistic Regression as a baseline, Random Forest, and XGBoost. The best model is selected by ROC-AUC score and saved.
+Step 4 — ML Model 2: 150 labelled return reason phrases are used to train a TF-IDF plus Logistic Regression pipeline that reads free text and outputs one of five categories — size_issue, damaged, changed_mind, not_as_described, price.
+Step 5 — Database: a SQLite database stores all orders, return windows, classified reasons, and notifications across 4 linked tables.
+Step 6 — Automation: run_reminders.py runs daily, scores all delivered orders through both models, fires reminders for likely returns, sends urgent alerts for closing windows, and auto-categorizes any unclassified return reasons.
 
-``` js
-var binary = require('binary');
+## How to Run
+1. pip install -r requirements.txt
+2. py data/generate_data.py
+3. py db/init_db.py
+4. Open notebooks/return_tracker.ipynb and run all cells
+5. py alerts/run_reminders.py
 
-var ws = binary()
-    .word32lu('x')
-    .word16bs('y')
-    .word16bu('z')
-    .tap(function (vars) {
-        console.dir(vars);
-    })
-;
-process.stdin.pipe(ws);
-process.stdin.resume();
-```
+## Folder Structure
+Show the full folder tree of the project
 
-output:
+## What I Wanted to Achieve
+- Build a real end to end machine learning project that goes from raw data to a working automated system
+- Learn and apply two types of ML — tabular classification and NLP text classification in one project
+- Understand reverse logistics as a domain and build something relevant to it
+- Practice SQL database design with linked tables and foreign keys
+- Show that a data science project is not just a notebook but includes a database layer and an automation layer that runs on a schedule
+- Produce a portfolio project strong enough to demonstrate applied ML, NLP, Python, SQL, and process automation skills to a recruiter or hiring manager
 
-```
-$ node examples/stream.js
-abcdefgh
-{ x: 1684234849, y: 25958, z: 26472 }
-^D
-```
-
-parse.js
---------
-
-``` js
-var buf = new Buffer([ 97, 98, 99, 100, 101, 102, 0 ]);
-
-var binary = require('binary');
-var vars = binary.parse(buf)
-    .word16ls('ab')
-    .word32bu('cf')
-    .word8('x')
-    .vars
-;
-console.dir(vars);
-```
-
-output:
-
-```
-{ ab: 25185, cf: 1667523942, x: 0 }
-```
-
-methods
-=======
-
-`var binary = require('binary')`
-
-var b = binary()
-----------------
-
-Return a new writable stream `b` that has the chainable methods documented below
-for buffering binary input.
-
-binary.parse(buf)
------------------
-
-Parse a static buffer in one pass. Returns a chainable interface with the
-methods below plus a `vars` field to get at the variable stash as the last item
-in a chain.
-
-In parse mode, methods will set their keys to `null` if the buffer isn't big
-enough except `buffer()` and `scan()` which read up up to the end of the buffer
-and stop.
-
-b.word{8,16,32,64}{l,b}{e,u,s}(key)
------------------------------------
-
-Parse bytes in the buffer or stream given:
-
-* number of bits
-* endianness ( l : little, b : big ),
-* signedness ( u and e : unsigned, s : signed )
-
-These functions won't start parsing until all previous parser functions have run
-and the data is available.
-
-The result of the parse goes into the variable stash at `key`.
-If `key` has dots (`.`s), it refers to a nested address. If parent container
-values don't exist they will be created automatically, so for instance you can
-assign into `dst.addr` and `dst.port` and the `dst` key in the variable stash
-will be `{ addr : x, port : y }` afterwards.
-
-b.buffer(key, size)
--------------------
-
-Take `size` bytes directly off the buffer stream, putting the resulting buffer
-slice in the variable stash at `key`. If `size` is a string, use the value at
-`vars[size]`. The key follows the same dotted address rules as the word
-functions.
-
-b.scan(key, buffer)
--------------------
-
-Search for `buffer` in the stream and store all the intervening data in the
-stash at at `key`, excluding the search buffer. If `buffer` passed as a string,
-it will be converted into a Buffer internally.
-
-For example, to read in a line you can just do:
-
-``` js
-var b = binary()
-    .scan('line', new Buffer('\r\n'))
-    .tap(function (vars) {
-        console.log(vars.line)
-    })
-;
-stream.pipe(b);
-```
-
-b.tap(cb)
----------
-
-The callback `cb` is provided with the variable stash from all the previous
-actions once they've all finished.
-
-You can nest additional actions onto `this` inside the callback.
-
-b.into(key, cb)
----------------
-
-Like `.tap()`, except all nested actions will assign into a `key` in the `vars`
-stash.
-
-b.loop(cb)
-----------
-
-Loop, each time calling `cb(end, vars)` for function `end` and the variable
-stash with `this` set to a new chain for nested parsing. The loop terminates
-once `end` is called.
-
-b.flush()
----------
-
-Clear the variable stash entirely.
-
-installation
-============
-
-To install with [npm](http://github.com/isaacs/npm):
-
-```
-npm install binary
-```
-
-notes
-=====
-
-The word64 functions will only return approximations since javascript uses ieee
-floating point for all number types. Mind the loss of precision.
-
-license
-=======
-
-MIT
+## Resume Bullet
+Built Package Return Tracker, a reverse-logistics intelligence tool with two ML models — a return-likelihood classifier (XGBoost) and an NLP/TF-IDF model categorizing free-text return reasons into 5 classes — wired to a SQLite tracker and an automated reminder engine that flags likely returns and surfaces closing return windows, preventing missed return deadlines.
 
