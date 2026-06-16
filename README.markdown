@@ -43,8 +43,7 @@ Show the full folder tree of the project
 - Understand reverse logistics as a domain and build something relevant to it
 - Practice SQL database design with linked tables and foreign keys
 - Show that a data science project is not just a notebook but includes a database layer and an automation layer that runs on a schedule
-- Produce a portfolio project strong enough to demonstrate applied ML, NLP, Python, SQL, and process automation skills to a recruiter or hiring manager
 
-## Resume Bullet
-Built Package Return Tracker, a reverse-logistics intelligence tool with two ML models — a return-likelihood classifier (XGBoost) and an NLP/TF-IDF model categorizing free-text return reasons into 5 classes — wired to a SQLite tracker and an automated reminder engine that flags likely returns and surfaces closing return windows, preventing missed return deadlines.
+
+
 
